@@ -48,7 +48,7 @@ static uint32 next_line_index = 1;
 uint8 g_fore_color = WHITE, g_back_color = BLUE;
 /* digit ascii code for printing integers  */
 int digit_ascii_codes[10] = {0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39};
-
+int vga_index_buffer = 0;
 
 //index for video buffer array
 /*
@@ -176,6 +176,7 @@ void crlf() {
     clear_vga_buffer(&vga_buffer, g_fore_color, g_back_color);
   }
   vga_index = 80*next_line_index;
+  vga_index_buffer = vga_index + 7;
   next_line_index++;
 }
 
@@ -229,7 +230,7 @@ void kinput() {
     keycode = get_input_keycode();
     if (keycode == KEY_ENTER) {
       crlf();
-      print_string("root@miletus# ");
+      print_string("root~# ");
       sleep(0x06FFFFFF);
     }
     else {uint32 digit_count(int num)
@@ -244,30 +245,252 @@ void kinput() {
   return count;
 }
       ch = get_input_keycode(keycode);
+      /* pressed key A */
       if (ch == KEY_A) {
         print_char(97);
         sleep(0x05FFFFFF);
       }
+
+      /* pressed key B */
       else if (ch == KEY_B) {
         print_char(98);
         sleep(0x05FFFFFF);
       }
+
+      /* pressed key C */
       else if (ch == KEY_C) {
         print_char(99);
         sleep(0x05FFFFFF);
       }
-      /* verificar na função backspace o controle do vga_index (para não apagar o menu do terminal) */
-      /* carregar informacoes do hardware durante inicialização do kernel */
-      /* após o carregamento do hardware, chamar a funcao konsole() que irá exercer a função de terminal */
-      /* atualizar estrutura de pastas e substituir na pasta MTOS (Mytheril OS)*/
-      else if (ch = KEY_BACKSPACE) {
-        vga_index--;
-        print_string(" ");
+
+      /* pressed key D */
+      else if (ch == KEY_D) {
+        print_char(100);
+        sleep(0x05FFFFFF);
+      }
+
+      /* pressed key E */
+      else if (ch == KEY_E) {
+        print_char(101);
+        sleep(0x05FFFFFF);
+      }
+
+      /* pressed key F */
+      else if (ch == KEY_F) {
+        print_char(102);
+        sleep(0x05FFFFFF);
+      }
+
+      /* pressed key G */
+      else if (ch == KEY_G) {
+        print_char(103);
+        sleep(0x05FFFFFF);
+      }
+
+      /* pressed key H */
+      else if (ch == KEY_H) {
+        print_char(104);
+        sleep(0x05FFFFFF);
+      }
+
+      /* pressed key I */
+      else if (ch == KEY_I) {
+        print_char(105);
+        sleep(0x05FFFFFF);
+      }
+
+      /* pressed key J */
+      else if (ch == KEY_J) {
+        print_char(106);
+        sleep(0x05FFFFFF);
+      }
+
+      /* pressed key K */
+      else if (ch == KEY_K) {
+        print_char(107);
+        sleep(0x05FFFFFF);
+      }
+
+      /* pressed key L */
+      else if (ch == KEY_L) {
+        print_char(108);
+        sleep(0x05FFFFFF);
+      }
+
+      /* pressed key M */
+      else if (ch == KEY_M) {
+        print_char(109);
+        sleep(0x05FFFFFF);
+      }
+
+      /* pressed key N */
+      else if (ch == KEY_N) {
+        print_char(110);
+        sleep(0x05FFFFFF);
+      }
+
+      /* pressed key O */
+      else if (ch == KEY_O) {
+        print_char(111);
+        sleep(0x05FFFFFF);
+      }
+
+      /* pressed key P */
+      else if (ch == KEY_P) {
+        print_char(112);
+        sleep(0x05FFFFFF);
+      }
+
+      /* pressed key Q */
+      else if (ch == KEY_Q) {
+        print_char(113);
+        sleep(0x05FFFFFF);
+      }
+
+      /* pressed key R */
+      else if (ch == KEY_R) {
+        print_char(114);
+        sleep(0x05FFFFFF);
+      }
+
+      /* pressed key R */
+      else if (ch == KEY_S) {
+        print_char(115);
+        sleep(0x05FFFFFF);
+      }
+
+      /* pressed key T */
+      else if (ch == KEY_T) {
+        print_char(116);
+        sleep(0x05FFFFFF);
+      }
+
+      /* pressed key U */
+      else if (ch == KEY_U) {
+        print_char(117);
+        sleep(0x05FFFFFF);
+      }
+
+      /* pressed key V */
+      else if (ch == KEY_V) {
+        print_char(118);
+        sleep(0x05FFFFFF);
+      }
+
+      /* pressed key X */
+      else if (ch == KEY_W) {
+        print_char(119);
+        sleep(0x05FFFFFF);
+      }
+
+      /* pressed key Y */
+      else if (ch == KEY_X) {
+        print_char(120);
+        sleep(0x05FFFFFF);
+      }
+
+      /* pressed key W */
+      else if (ch == KEY_Y) {
+        print_char(121);
+        sleep(0x05FFFFFF);
+      }
+
+      /* pressed key Z */
+      else if (ch == KEY_Z) {
+        print_char(122);
+        sleep(0x05FFFFFF);
+      }
+
+
+      /* special keys */
+      /* BACKSPACE, SPACE, MINUS, DOT */
+
+      /* special keys pressed {BACKSPACE} */
+      else if (ch == KEY_BACKSPACE) {
+        if (vga_index > vga_index_buffer) {
+          vga_index--;
+          print_string(" ");
+          sleep(0x06FFFFFF);
+          vga_index--;
+        }
+      }
+
+      /* special keys pressed {SPACE} */
+      else if (ch == KEY_SPACE) {
+        vga_index++;
         sleep(0x06FFFFFF);
-        vga_index--;
-      }    
+      }
+
+      /* special keys pressed {-} */
+      else if (ch == KEY_MINUS) {
+        print_string("-");
+        sleep(0x06FFFFFF);
+      }
+
+      /* special keys pressed {-} */
+      else if (ch == KEY_DOT) {
+        print_string(".");
+        sleep(0x06FFFFFF);
+      }
+
+      /* numerers [0-9] */
+
+      /* pressed key 0 */
+      else if (ch == KEY_0) {
+        print_char(48);
+        sleep(0x05FFFFFF);
+      }
+      /* pressed key 1 */
+      else if (ch == KEY_1) {
+        print_char(49);
+        sleep(0x05FFFFFF);
+      }
+      
+      /* pressed key 2 */
+      else if (ch == KEY_2) {
+        print_char(50);
+        sleep(0x05FFFFFF);
+      }
+      /* pressed key 3 */
+      else if (ch == KEY_3) {
+        print_char(51);
+        sleep(0x05FFFFFF);
+      }
+      /* pressed key 4 */
+      else if (ch == KEY_4) {
+        print_char(52);
+        sleep(0x05FFFFFF);
+      }
+      /* pressed key 5*/
+      else if (ch == KEY_5) {
+        print_char(53);
+        sleep(0x05FFFFFF);
+      }
+      /* pressed key 6*/
+      else if (ch == KEY_6) {
+        print_char(54);
+        sleep(0x05FFFFFF);
+      }
+      /* pressed key 7*/
+      else if (ch == KEY_7) {
+        print_char(55);
+        sleep(0x05FFFFFF);
+      }
+      /* pressed key 8*/
+      else if (ch == KEY_8) {
+        print_char(56);
+        sleep(0x05FFFFFF);
+      }
+      /* pressed key 9*/
+      else if (ch == KEY_9) {
+        print_char(57);
+        sleep(0x05FFFFFF);
+      }
+
     }
     sleep(0x02FFFFFF);
   }
   while(ch > 0);
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -1,9 +1,18 @@
 /* required libraries */
 #include "include/kernel.h"
 
+/* Konsole */
+void konsole() {
+  print_string("root~# ");
+  //print_int(vga_index_buffer);
+  //print_int(vga_index_buffer);
+  kinput();
+  //crlf();
+  //print_string("root~# ");
+  //print_int(vga_index_buffer);
+}
 
-void kernel_entry()
-{
+void kernel_entry() {
   //first init vga with fore & back colors
   init_vga(GREY, BLACK);
 
@@ -12,12 +21,11 @@ void kernel_entry()
     assign g_fore_color & g_back_color to color values
     g_fore_color = BRIGHT_RED;
   */
-
-  print_string("root~0.0.7# ");
-  sleep(0x20FFFFFF);
-  print_string("helo, kernel world!");
+  //sleep(0x20FFFFFF);
+  print_string("Mytheril (Developer Edition)");
   crlf();
-  print_string("Hello");
-  kinput();
+  print_string("Kernel 0.0.0-22");
+  crlf();
+  konsole();
 
 }
